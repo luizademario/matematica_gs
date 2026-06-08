@@ -22,7 +22,7 @@ print()
 
 # ==============================================================================
 # MODELO 1 - FUNÇÃO AFIM (1º GRAU)
-# Função: y = 6000 * x + 15000
+# Função: y = 5500 * x + 10000
 # Variáveis:
 #   x (Domínio): Peso da carga útil (satélite) em kg -> [0, +infinito)
 #   y (Imagem): Custo total do lançamento em USD
@@ -30,11 +30,16 @@ print()
 
 print("---------------------------------------------------------------------")
 print("MODELO 1: Função Afim (Custo por Peso da Carga)")
-print("Equação: y = 6000x + 15000")
+print("Equação: y = 5500x + 10000")
 print("---------------------------------------------------------------------")
 
-coef_angular_a = 6000
-coef_linear_b = 15000 
+print("Base de mercado utilizada: programa SpaceX Transporter (rideshare)")
+print("Faixa observada: USD 5.000 a USD 10.000 por kg")
+print("Valor adotado para o modelo: USD 5.500/kg")
+print()
+
+coef_angular_a = 5500
+coef_linear_b = 10000
 print(f"-> Coeficiente Angular (a) = {coef_angular_a}")
 print(f"   Significado: Cada 1 kg adicionado ao satélite aumenta o custo em U$ {coef_angular_a},00")
 print(f"-> Coeficiente Linear (b) = {coef_linear_b}")
@@ -50,18 +55,18 @@ print(f"{'Peso (x em kg)':<15} | {'Custo Total (y em USD)':<20}")
 print("-" * 40)
 
 for peso in pesos_satelite:
-    custo_calculado = (6000 * peso) + 15000
+    custo_calculado = (5500 * peso) + 10000
     print(f"{peso:<15} | U$ {custo_calculado:<18,.2f}")
 print()
 
 eixo_x_modelo1 = list(range(0, 14))
 eixo_y_modelo1 = []
 for x in eixo_x_modelo1:
-    y = (6000 * x) + 15000
+    y = (5500 * x) + 10000
     eixo_y_modelo1.append(y)
 
 plt.figure(figsize=(7, 5))
-plt.plot(eixo_x_modelo1, eixo_y_modelo1, color="blue", marker="o", linestyle="-", label="y = 6000x + 15000")
+plt.plot(eixo_x_modelo1, eixo_y_modelo1, color="blue", marker="o", linestyle="-", label="y = 5500x + 10000")
 plt.title("Modelo 1: Função Afim\nCusto de Lançamento por Peso da Carga (Rideshare)")
 plt.xlabel("Peso da Carga Útil (kg)")
 plt.ylabel("Custo Total do Lançamento (USD)")
@@ -179,7 +184,7 @@ print()
 
 # ==============================================================================
 # MODELO 3 - FUNÇÃO EXPONENCIAL
-# Equação: S(t) = 100 * e^(0.28 * t)
+# Equação: S(t) = 100 * e^(0.167 * t)
 # Variáveis:
 #   t (Domínio): Anos decorridos após 2015 (t=0 -> ano 2015)
 #   S(t) (Imagem): Quantidade de satélites lançados por ano mundialmente
@@ -187,14 +192,18 @@ print()
 
 print("---------------------------------------------------------------------")
 print("MODELO 3: Função Exponencial (Crescimento do Mercado Espacial)")
-print("Equação: S(t) = 100 * e^(0.28t)")
+print("Equação: S(t) = 100 * e^(0.167t)")
 print("---------------------------------------------------------------------")
 
+print("Base histórica: crescimento de smallsats entre 2015 e 2024")
+print("Taxa calculada a partir dos dados: 16,7% ao ano")
+print()
+
 S0 = 100
-taxa_crescimento_r = 0.28
+taxa_crescimento_r = 0.167
 
 print(f"-> Tamanho de Mercado em 2015 (t=0): {S0} satélites lançados.")
-print(f"-> Taxa de Crescimento Contínuo (r): {taxa_crescimento_r * 100:.0f}% ao ano.")
+print(f"-> Taxa de Crescimento Contínuo (r): {taxa_crescimento_r * 100:.1f}% ao ano.")
 print("Análise de Comportamento: Como a base (e) é aproximadamente 2.718 e o expoente r > 0,")
 print("a curva cresce de forma exponencial, caracterizando um mercado em BOOM tecnológico.")
 print()
@@ -231,7 +240,7 @@ for t in eixo_t_completo:
     eixo_s_completo.append(S0 * math.exp(taxa_crescimento_r * t))
 
 plt.figure(figsize=(7, 5))
-plt.plot(eixo_anos_completo, eixo_s_completo, color="darkorange", marker="d", linestyle="-", label="S(t) = 100 * e^(0.28t)")
+plt.plot(eixo_anos_completo, eixo_s_completo, color="darkorange", marker="d", linestyle="-", label="S(t) = 100 * e^(0.167t)")
 plt.axvline(x=2026, color="purple", linestyle="--", label="Ano Atual (2026)")
 
 sat_2026 = S0 * math.exp(taxa_crescimento_r * (2026 - 2015))
